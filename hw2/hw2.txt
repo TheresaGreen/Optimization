@@ -1,0 +1,83 @@
+Problem 1:
+a) It's a clean directory. There are no tracked npr modified files.
+b)fun_problem.txt is untracked and README.md is modified (but not
+ yet staged)
+c)fun_problem.txt and README.md are both staged
+d)Both fun_problem.txt and README.md are modified but not yet staged
+e) README.md is staged and fun_problem.t(xt is now just a blank text
+ and has nothing to commit because git -- checkout discarded changes
+  in the working directory. There've been no modifications.
+f)README.md is now both staged to commit the first change but is also
+ modified because the second modification was never staged. 
+
+Problem 3:
+a)This is 0(nlogn). Assume the worst case, A[i]==0 is always true. So 
+for every i we have to go into the inner for loop. Since the inner for
+ loop takes logn time (because j is being doubled each iteration), and
+  the outer loop take n time (because we're simply stepping through
+every value between 0 and n) then the total run time takes O(nlogn) time.
+
+b)This is O(n^2). My reasoning is that the outer most loop runs from
+ 0 - n (takes O(n) time), then the second loop also runs from 0 - n.
+  The inner most loog is only entered when j%i is true. The inner 
+  most loop has a runtime of log(n) because k is always doubling. So 
+  when i=1, j%i is always true for all j between 0 and n, then when i=2 
+  j%2 it's only true for the evens. So this last loop is entered
+  n/1 + n/2 +...+n/n) times. Factor out an n and you get n times a constant
+   which can be rounded to n. This means you can add nlogn to the run
+    time giving you O(n^2 + logn) which simplifies down to just 0(n^2).
+
+c)This is O(n^2). The outer loop runs from 0 to n thus that loop alone 
+take n time. The if statement is only satisfied for multiples of 10. So 
+the if statement is only satisfied the_floor_of (n/10) times. Then the 
+inner most for loop only goes from 0 to the current size (the first time
+ it will be from 0 to 10, second time from 0 to 20, ect.).
+
+d)This is O(n). This is similiar to the last problem except the size is now 
+doubling each time. So the if statement is only satisfied when i=10, 20, 40,
+ 80, ect. or when i=10*2^(n-1). In between those i's run time is constant
+(O(1)). So because that state is rarely ever satisfied as n gets bigger
+and bigger. 
+
+Problem 4:
+1. I would keep the list of presidents in a string vector. The string being 
+the name of the president and the indice coorilating to the order they served.
+You only need to add an element (a president) to the list every 4 years and 
+there is no need to take off any. In a vector it's easy to access any one pres-
+ident regardless of posistion. Finding out who was the 20th president is a cintch!
+
+2. I would store this in a map. A map is an index collection, so here you 
+can have the indexs be zipcodes(int), possibly using strings for easy user input.
+And of course containing an int for the population size.
+
+3. I would store this in a set that contains the name of the student(string).
+Here it doesn't matter what order they're in, it just matters if they got 
+the problem right or not. 
+
+4. I would store this a list of structs that holds the user id (int), and the
+grades they recieved for certain assignments (int). You can store multiple 
+assignment grades inside the structs, for however many assignments there are.
+Keeping it in a struct can hold all the information about one student in one
+place.
+
+
+
+Problem 5: funcA will return you a linked list in the reverse order [5,4,3,2,1].
+ So the first call to funcA is called on the first node in the list; 1, 
+ which calls funcA on the second node, which calls funcA on the 3rd, ect. 
+ When it calls it on the last node; 5 it returns the node 5 back to funcA as 
+ the 'out'. Then funcB is called on 4 and 5. What this function does is make 
+ the last node in the linked list linked to 5 link up to 4. Since 5 is linked
+ to nothing (it was the end of the list), 5 now simply points to 4. End of 
+ funcB. Then back in funcA 4's now points to nothing because its the end of 
+ this new chan. The node 5 is returned to funcA called with the 3rd node.
+ Now its time for 3 to hook onto the chain! funcB is called with 3, 5.
+ Since 5 is not the end of the chain funcB is called on the next link, 4.
+ So funcB is called on node 3, 4 now. Because 4 is the end of the new 
+ chain it changes it's next value to node 3. End of funcB. Back in funcA 3 is
+ made to point to nothing, because it's now the end of this new chain and 
+ needs to forget where it used to point. So this continues in the same fashion
+ until all the nodes are linked up in the order [5, 4, 3, 2, 1]. The last node, 
+ the one containing value 1, now points to NULL as the end of the line. funcA 
+ finally returns this linked list to the user (or however may have called it).
+
